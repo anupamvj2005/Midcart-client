@@ -1,0 +1,34 @@
+services:
+  # Main Node.js Backend Server
+  - type: web
+    name: pharmax-server
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRE
+        value: 30d
+      - key: ML_API_URL
+        value: https://pharmax-ml-api.onrender.com
+      - key: CLIENT_URL
+        sync: false # Set this to your Vercel URL in the Render dashboard
+
+  # Flask ML API
+  - type: web
+    name: pharmax-ml-api
+    env: python
+    plan: free
+    rootDir: ml-api
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0

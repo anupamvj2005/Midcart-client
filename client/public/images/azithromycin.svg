@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet">
+  <rect width="120" height="120" rx="20" fill="#f0f9ff" />
+  <path d="M30 40 h60 a10 10 0 0 1 10 10 v30 a10 10 0 0 1 -10 10 h-60 a10 10 0 0 1 -10 -10 v-30 a10 10 0 0 1 10 -10 z" fill="#0ea5e9" />
+  <rect x="45" y="50" width="30" height="20" rx="5" fill="#e0f2fe" />
+</svg>

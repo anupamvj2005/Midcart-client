@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: smartpharma-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: smartpharma
+
+  backend:
+    build: ./backend
+    container_name: smartpharma-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/smartpharma
+      - JWT_SECRET=supersecretjwtkey123
+      - NODE_ENV=development
+      - ML_API_URL=http://ml-api:8000
+      - CLIENT_URL=http://localhost:5173
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  ml-api:
+    build: ./ml-api
+    container_name: smartpharma-ml
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml-api:/app
+
+  frontend:
+    build: ./frontend
+    container_name: smartpharma-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

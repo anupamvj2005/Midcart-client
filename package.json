@@ -1,0 +1,9 @@
+{
+  "name": "pharmax",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "npx concurrently -c \"blue,magenta,green\" -n \"server,ml,client\" \"cd server && npm install && npm run dev\" \"cd ml-api && pip install -r requirements.txt && python app.py\" \"cd client && npm install && npm run dev\"",
+    "build": "cd client && npm install && npm run build"
+  }
+}

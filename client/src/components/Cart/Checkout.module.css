@@ -1,0 +1,38 @@
+.title { font-size: 1.6rem; font-weight: 800; margin-bottom: 28px; }
+.steps { display: flex; align-items: center; gap: 0; margin-bottom: 32px; }
+.step { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); flex: 1; }
+.step:not(:last-child)::after { content: ''; flex: 1; height: 2px; background: var(--border); margin: 0 12px; }
+.stepCircle { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; background: var(--surface); flex-shrink: 0; }
+.stepActive .stepCircle { border-color: var(--primary); background: var(--primary); color: #fff; }
+.stepActive { color: var(--text-primary); }
+.stepDone .stepCircle { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+.layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+.stepTitle { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+.addressForm { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.addressForm input:first-child, .addressForm input:nth-child(3) { grid-column: 1 / -1; }
+
+.paymentOptions { display: flex; flex-direction: column; gap: 12px; }
+.payOption { display: flex; align-items: center; gap: 14px; padding: 16px; border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+.payOption:hover { border-color: var(--primary); }
+.paySelected { border-color: var(--primary); background: var(--primary-light); }
+.payOption input { accent-color: var(--primary); }
+.payEmoji { font-size: 1.5rem; }
+.payOption strong { display: block; font-size: 0.92rem; }
+.payOption p { font-size: 0.8rem; color: var(--text-muted); }
+
+.reviewSection { margin-bottom: 16px; }
+.reviewLabel { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+.reviewSection p { font-size: 0.88rem; color: var(--text-secondary); }
+.reviewItems { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.reviewItem { display: flex; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+.reviewItem:last-child { border-bottom: none; }
+.reviewItem span:first-child { flex: 1; color: var(--text-secondary); }
+
+.sidebar {}
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .addressForm { grid-template-columns: 1fr; }
+  .addressForm input { grid-column: 1 !important; }
+}
