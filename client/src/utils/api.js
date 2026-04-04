@@ -1,9 +1,12 @@
 import axios from 'axios'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+// Global API Config ensuring deployed backend URL is robust and correctly targeted
+const API = import.meta.env.VITE_API_URL || 'https://pharmax-1-4efg.onrender.com'
+
+console.log("API URL:", API);
 
 const api = axios.create({
-  baseURL: `${API_URL}/api`,
+  baseURL: `${API}/api`,
   timeout: 15000,
 })
 
