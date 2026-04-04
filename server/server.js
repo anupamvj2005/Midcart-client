@@ -30,11 +30,11 @@ const app = express();
 // =====================
 if (!process.env.JWT_SECRET) {
   process.env.JWT_SECRET = 'smartpharma-dev-jwt-change-in-production';
-  console.warn('⚠️ JWT_SECRET not set — using default (change in production)');
+  console.warn('⚠️ JWT_SECRET not set — using default');
 }
 
 // =====================
-// 📁 STATIC FILES (uploads only)
+// 📁 STATIC FILES
 // =====================
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -42,8 +42,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // 🔐 SECURITY
 // =====================
 app.use(helmet());
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || '*', // allow frontend
+  origin: [
+    "http://localhost:5173",
+    process.env.CLIENT_URL // your Vercel URL
+  ],
   credentials: true
 }));
 
@@ -53,7 +57,6 @@ app.use(cors({
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 200,
-  message: 'Too many requests, try again later.'
 });
 app.use('/api/', limiter);
 
@@ -62,7 +65,7 @@ app.use('/api/', limiter);
 // =====================
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
 
 // =====================
 // 🔗 API ROUTES
@@ -78,10 +81,13 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ml', mlRoutes);
 
 // =====================
-// ✅ ROOT ROUTE (IMPORTANT FIX)
+// ✅ ROOT ROUTE (FIXED)
 // =====================
 app.get('/', (req, res) => {
-  res.send('🚀 SmartPharma API is running successfully');
+  res.status(200).json({
+    message: "🚀 SmartPharma API is running",
+    status: "OK"
+  });
 });
 
 // =====================
@@ -89,20 +95,29 @@ app.get('/', (req, res) => {
 // =====================
 app.get('/health', (req, res) => {
   res.json({
-    status: 'ok',
+    status: "ok",
     time: new Date().toISOString()
   });
 });
 
 // =====================
-// ⏰ CRON JOB
+// ❌ 404 HANDLER (IMPORTANT)
 // =====================
-cron.schedule('0 8 * * *', checkExpiryAlerts);
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Route not found"
+  });
+});
 
 // =====================
 // ❌ ERROR HANDLER
 // =====================
 app.use(errorHandler);
+
+// =====================
+// ⏰ CRON JOB
+// =====================
+cron.schedule('0 8 * * *', checkExpiryAlerts);
 
 // =====================
 // 🚀 SERVER START
@@ -114,13 +129,12 @@ const start = async () => {
     await connectDB();
 
     app.listen(PORT, () => {
-      console.log(`\n🚀 SmartPharma Backend running on port ${PORT}`);
-      console.log(`📊 Environment: ${process.env.NODE_ENV}`);
-      console.log(`🌐 CORS: ${process.env.CLIENT_URL || '*'}\n`);
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📊 ENV: ${process.env.NODE_ENV}`);
     });
 
   } catch (err) {
-    console.error(`❌ MongoDB Error: ${err.message}`);
+    console.error("❌ MongoDB Error:", err.message);
     process.exit(1);
   }
 };
