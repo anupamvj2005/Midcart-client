@@ -4,15 +4,10 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
-dotenv.config();
 const cron = require('node-cron');
 const path = require('path');
 
-
-if (!process.env.JWT_SECRET) {
-  process.env.JWT_SECRET = 'smartpharma-dev-jwt-change-in-production';
-  console.warn('⚠️  JWT_SECRET not set — using a development default. Set JWT_SECRET in backend/.env for production.');
-}
+dotenv.config();
 
 const connectDB = require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
@@ -30,30 +25,48 @@ const mlRoutes = require('./routes/mlRoutes');
 
 const app = express();
 
-// Local prescription/product uploads (when Cloudinary is not configured)
+// =====================
+// 🔐 ENV SAFETY
+// =====================
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = 'smartpharma-dev-jwt-change-in-production';
+  console.warn('⚠️ JWT_SECRET not set — using default (change in production)');
+}
+
+// =====================
+// 📁 STATIC FILES (uploads only)
+// =====================
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Security Middleware
+// =====================
+// 🔐 SECURITY
+// =====================
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: process.env.CLIENT_URL || '*', // allow frontend
   credentials: true
 }));
 
-// Rate Limiting
+// =====================
+// 🚦 RATE LIMIT
+// =====================
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 200,
-  message: 'Too many requests from this IP, please try again later.'
+  message: 'Too many requests, try again later.'
 });
 app.use('/api/', limiter);
 
-// Logging & Parsing
+// =====================
+// 📊 MIDDLEWARE
+// =====================
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// API Routes
+// =====================
+// 🔗 API ROUTES
+// =====================
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/medicines', productRoutes);
@@ -64,41 +77,52 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ml', mlRoutes);
 
-// Serve React build
-app.use(express.static(path.join(__dirname, "../client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+// =====================
+// ✅ ROOT ROUTE (IMPORTANT FIX)
+// =====================
+app.get('/', (req, res) => {
+  res.send('🚀 SmartPharma API is running successfully');
 });
 
-// Health Check
+// =====================
+// 🩺 HEALTH CHECK
+// =====================
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    time: new Date().toISOString()
+  });
 });
 
-// Cron Jobs
-// Run expiry check every day at 8 AM
+// =====================
+// ⏰ CRON JOB
+// =====================
 cron.schedule('0 8 * * *', checkExpiryAlerts);
 
-// Error Handler (must be last)
+// =====================
+// ❌ ERROR HANDLER
+// =====================
 app.use(errorHandler);
 
+// =====================
+// 🚀 SERVER START
+// =====================
 const PORT = process.env.PORT || 5000;
 
 const start = async () => {
   try {
     await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(`\n🚀 SmartPharma Backend running on port ${PORT}`);
+      console.log(`📊 Environment: ${process.env.NODE_ENV}`);
+      console.log(`🌐 CORS: ${process.env.CLIENT_URL || '*'}\n`);
+    });
+
   } catch (err) {
     console.error(`❌ MongoDB Error: ${err.message}`);
-    console.error('   Fix MONGO_URI in backend/.env (include /smartpharma or your DB name).' +
-      ' For Atlas: Network Access must allow your IP.');
     process.exit(1);
   }
-  app.listen(PORT, () => {
-    console.log(`\n🚀 SmartPharma Backend running on port ${PORT}`);
-    console.log(`📊 Environment: ${process.env.NODE_ENV}`);
-    console.log(`🌐 CORS origin: ${process.env.CLIENT_URL || 'http://localhost:5173'}\n`);
-  });
 };
 
 start();
