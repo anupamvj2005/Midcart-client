@@ -172,7 +172,7 @@ def _demo_from_catalog(catalog, seed_str=''):
             break
 
     if len(picked) < 3 and cat_list:
-        h = int(hashlib.md5((seed_str or 'smartpharma').encode()).hexdigest(), 16)
+        h = int(hashlib.md5((seed_str or 'midcart').encode()).hexdigest(), 16)
         idx = h % max(1, len(cat_list))
         for i in range(min(5, len(cat_list))):
             c = cat_list[(idx + i) % len(cat_list)]
@@ -208,7 +208,7 @@ def extract_medicines_from_prescription(image_url=None, image_file=None, catalog
     if TESSERACT_AVAILABLE:
         try:
             if image_url:
-                response = requests.get(image_url, timeout=25, headers={'User-Agent': 'SmartPharma-OCR/1.0'})
+                response = requests.get(image_url, timeout=25, headers={'User-Agent': 'MidCart-OCR/1.0'})
                 response.raise_for_status()
                 img = Image.open(BytesIO(response.content))
             else:

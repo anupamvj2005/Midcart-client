@@ -1,8 +1,8 @@
 {
-  "name": "smartpharma-backend",
+  "name": "midcart-backend",
   "version": "1.0.0",
   "type": "commonjs",
-  "description": "SmartPharma Node.js + Express Backend",
+  "description": "MidCart Node.js + Express Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

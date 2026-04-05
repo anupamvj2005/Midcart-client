@@ -23,7 +23,7 @@ const checkExpiryAlerts = async () => {
     if (expiring.length === 0 && lowStock.length === 0) return;
 
     const html = `
-      <h2>📊 SmartPharma Daily Inventory Alert</h2>
+      <h2>📊 MidCart Daily Inventory Alert</h2>
       ${expiring.length > 0 ? `
         <h3>⚠️ Near Expiry Products (${expiring.length})</h3>
         <ul>${expiring.map(p => `<li>${p.name} — Expires: ${p.expiryDate?.toDateString()} | Stock: ${p.stock.quantity}</li>`).join('')}</ul>
@@ -37,7 +37,7 @@ const checkExpiryAlerts = async () => {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      subject: `🚨 SmartPharma Alert — ${new Date().toDateString()}`,
+      subject: `🚨 MidCart Alert — ${new Date().toDateString()}`,
       html,
     });
 

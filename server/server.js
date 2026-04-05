@@ -29,7 +29,7 @@ const app = express();
 // 🔐 ENV SAFETY
 // =====================
 if (!process.env.JWT_SECRET) {
-  process.env.JWT_SECRET = 'smartpharma-dev-jwt-change-in-production';
+  process.env.JWT_SECRET = 'midcart-dev-jwt-change-in-production';
   console.warn('⚠️ JWT_SECRET not set — using default');
 }
 
@@ -85,7 +85,7 @@ app.use('/api/ml', mlRoutes);
 // =====================
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: "🚀 SmartPharma API is running",
+    message: "🚀 MidCart API is running",
     status: "OK"
   });
 });

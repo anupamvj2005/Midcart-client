@@ -43,7 +43,7 @@ if (isCloudinaryConfigured()) {
   const prescriptionStorage = new CloudinaryStorage({
     cloudinary,
     params: {
-      folder: 'smartpharma/prescriptions',
+      folder: 'midcart/prescriptions',
       allowed_formats: ['jpg', 'jpeg', 'png', 'pdf'],
       resource_type: 'auto',
     },
@@ -52,7 +52,7 @@ if (isCloudinaryConfigured()) {
   const productStorage = new CloudinaryStorage({
     cloudinary,
     params: {
-      folder: 'smartpharma/products',
+      folder: 'midcart/products',
       allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
       transformation: [{ width: 500, height: 500, crop: 'limit' }],
     },

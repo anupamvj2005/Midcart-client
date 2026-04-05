@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongodb:
     image: mongo:7
-    container_name: smartpharma-mongo
+    container_name: midcart-mongo
     ports:
       - "27017:27017"
     volumes:
@@ -13,7 +13,7 @@ services:
 
   backend:
     build: ./backend
-    container_name: smartpharma-backend
+    container_name: midcart-backend
     ports:
       - "5000:5000"
     environment:
@@ -30,7 +30,7 @@ services:
 
   ml-api:
     build: ./ml-api
-    container_name: smartpharma-ml
+    container_name: midcart-ml
     ports:
       - "8000:8000"
     volumes:
@@ -38,7 +38,7 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: smartpharma-frontend
+    container_name: midcart-frontend
     ports:
       - "5173:5173"
     environment:

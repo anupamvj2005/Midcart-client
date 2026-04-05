@@ -4,7 +4,7 @@ const User = require('../models/User');
 const Cart = require('../models/Cart');
 
 const jwtSecret = () =>
-  process.env.JWT_SECRET || 'smartpharma-dev-jwt-change-in-production';
+  process.env.JWT_SECRET || 'midcart-dev-jwt-change-in-production';
 
 const generateToken = (id) => {
   return jwt.sign({ id }, jwtSecret(), {

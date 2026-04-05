@@ -15,7 +15,7 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    const secret = process.env.JWT_SECRET || 'smartpharma-dev-jwt-change-in-production';
+    const secret = process.env.JWT_SECRET || 'midcart-dev-jwt-change-in-production';
     const decoded = jwt.verify(token, secret);
     req.user = await User.findById(decoded.id).select('-password');
 

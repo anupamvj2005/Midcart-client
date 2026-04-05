@@ -22,7 +22,7 @@ const seed = async () => {
     const adminPassword = await bcrypt.hash('Admin@123', 12);
     const admin = await User.create({
       name: 'Admin User',
-      email: 'admin@smartpharma.com',
+      email: 'admin@midcart.com',
       password: adminPassword,
       role: 'admin',
       phone: '9999999999',
@@ -33,7 +33,7 @@ const seed = async () => {
     const pharmPassword = await bcrypt.hash('Pharm@123', 12);
     const pharmacist = await User.create({
       name: 'Dr. Priya Sharma',
-      email: 'pharmacist@smartpharma.com',
+      email: 'pharmacist@midcart.com',
       password: pharmPassword,
       role: 'pharmacist',
       phone: '9888888888',
@@ -44,7 +44,7 @@ const seed = async () => {
     const userPassword = await bcrypt.hash('User@123', 12);
     const user = await User.create({
       name: 'Rahul Patil',
-      email: 'user@smartpharma.com',
+      email: 'user@midcart.com',
       password: userPassword,
       role: 'user',
       phone: '9777777777',
@@ -55,9 +55,9 @@ const seed = async () => {
     await Product.insertMany(products);
 
     console.log('\n✅ Database seeded successfully!');
-    console.log('👤 Admin: admin@smartpharma.com / Admin@123');
-    console.log('💊 Pharmacist: pharmacist@smartpharma.com / Pharm@123');
-    console.log('🙍 User: user@smartpharma.com / User@123');
+    console.log('👤 Admin: admin@midcart.com / Admin@123');
+    console.log('💊 Pharmacist: pharmacist@midcart.com / Pharm@123');
+    console.log('🙍 User: user@midcart.com / User@123');
     console.log(`📦 Products: ${products.length} created (with product photos)`);
 
     process.exit(0);

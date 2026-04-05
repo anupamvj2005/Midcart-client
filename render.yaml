@@ -1,7 +1,7 @@
 services:
   # Main Node.js Backend Server
   - type: web
-    name: pharmax-server
+    name: midcart-server
     env: node
     plan: free
     rootDir: server
@@ -17,13 +17,13 @@ services:
       - key: JWT_EXPIRE
         value: 30d
       - key: ML_API_URL
-        value: https://pharmax-ml-api.onrender.com
+        value: https://midcart-ml-api.onrender.com
       - key: CLIENT_URL
         sync: false # Set this to your Vercel URL in the Render dashboard
 
   # Flask ML API
   - type: web
-    name: pharmax-ml-api
+    name: midcart-ml-api
     env: python
     plan: free
     rootDir: ml-api

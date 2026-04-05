@@ -19,7 +19,7 @@ CORS(app, origins=["http://localhost:5173", "http://localhost:5000"])
 # ─────────────────────────────────────────────
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({"status": "ok", "service": "SmartPharma ML API"})
+    return jsonify({"status": "ok", "service": "MidCart ML API"})
 
 
 # ─────────────────────────────────────────────
@@ -148,5 +148,5 @@ def extract_prescription():
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8000))
     debug = os.getenv('FLASK_ENV') == 'development'
-    print(f"\n[ML] SmartPharma ML API running on port {port}")
+    print(f"\n[ML] MidCart ML API running on port {port}")
     app.run(host='0.0.0.0', port=port, debug=debug)

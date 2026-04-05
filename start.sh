@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Starting SmartPharma..."
+echo "🚀 Starting MidCart..."
 echo ""
 
 # Check if .env files exist, copy examples if not
@@ -38,14 +38,14 @@ cd ..
 
 echo ""
 echo "═══════════════════════════════════════"
-echo "✅ SmartPharma is starting up!"
+echo "✅ MidCart is starting up!"
 echo ""
 echo "  Frontend:  http://localhost:5173"
 echo "  Backend:   http://localhost:5000"
 echo "  ML API:    http://localhost:8000"
 echo ""
-echo "  Admin:     admin@smartpharma.com / Admin@123"
-echo "  User:      user@smartpharma.com  / User@123"
+echo "  Admin:     admin@midcart.com / Admin@123"
+echo "  User:      user@midcart.com  / User@123"
 echo "═══════════════════════════════════════"
 echo ""
 echo "Press Ctrl+C to stop all services"

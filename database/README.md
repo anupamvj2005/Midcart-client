@@ -1,4 +1,4 @@
-# SmartPharma – Database Documentation
+# MidCart – Database Documentation
 
 ## Connection
 MongoDB (local or Atlas). Set `MONGO_URI` in `backend/.env`.
@@ -76,7 +76,7 @@ MongoDB (local or Atlas). Set `MONGO_URI` in `backend/.env`.
 
 ## Seed Data
 Run `cd backend && npm run seed` to populate with:
-- 1 admin user (admin@smartpharma.com / Admin@123)
-- 1 pharmacist (pharmacist@smartpharma.com / Pharm@123)
-- 1 test user (user@smartpharma.com / User@123)
+- 1 admin user (admin@midcart.com / Admin@123)
+- 1 pharmacist (pharmacist@midcart.com / Pharm@123)
+- 1 test user (user@midcart.com / User@123)
 - 6 sample products across different categories

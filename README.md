@@ -1,11 +1,11 @@
-# 💊 PharmaX – Intelligent Online Pharmacy Platform
+# 💊 Midcart – Intelligent Online Pharmacy Platform
 
 A full-stack MERN + Python ML pharmacy system with prescription upload, smart inventory, demand forecasting & more.
 
 ## 📁 Project Structure
 
 ```
-PharmaX/
+Midcart/
 ├── client/          → React.js (Vite) – User Interface
 ├── server/          → Node.js + Express.js – REST API
 ├── ml-api/          → Python Flask – ML Microservice
@@ -45,8 +45,8 @@ The `server` and `ml-api` can be deployed simultaneously using the provided `ren
 1. Go to [Render.com](https://render.com) and create an account.
 2. Click **New +** and select **Blueprint**.
 3. Connect your GitHub repository.
-4. Render will automatically detect the `render.yaml` file in the root folder and configure your **pharmax-server** and **pharmax-ml-api** services.
-5. In the Render Dashboard, open the Environment settings for **pharmax-server** and specify these fields when prompted:
+4. Render will automatically detect the `render.yaml` file in the root folder and configure your **midcart-server** and **midcart-ml-api** services.
+5. In the Render Dashboard, open the Environment settings for **midcart-server** and specify these fields when prompted:
    - `MONGO_URI`: Your MongoDB Atlas URL
    - `JWT_SECRET`: A secure random string for JWTs
    - `CLIENT_URL`: Your Vercel frontend URL (You will update this after you deploy step 2).
@@ -59,7 +59,7 @@ The frontend React app is optimized for Vercel deployment. (A `vercel.json` rout
 3. Import your GitHub repository.
 4. In the project configuration, set the **Root Directory** to `client`.
 5. Under **Environment Variables**, add:
-   - `VITE_API_URL`: Set this to your new Render Backend URL (e.g., `https://pharmax-server.onrender.com/api`).
+   - `VITE_API_URL`: Set this to your new Render Backend URL (e.g., `https://midcart-server.onrender.com/api`).
 6. Click **Deploy**.
 
 **Remember:** After Vercel deploys your frontend, grab the generated frontend URL and add it to your Render Backend's `CLIENT_URL` environment variable to ensure CORS works correctly.
@@ -67,7 +67,7 @@ The frontend React app is optimized for Vercel deployment. (A `vercel.json` rout
 ---
 
 ## 🔑 Default Admin Credentials
-- Email: `admin@smartpharma.com`
+- Email: `admin@midcart.com`
 - Password: `Admin@123`
 
 ## 🌟 Features
