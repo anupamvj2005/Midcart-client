@@ -30,7 +30,7 @@ export default function Login() {
         <div className={styles.header}>
           <div className={styles.logo}>💊</div>
           <h1>Welcome Back</h1>
-          <p>Login to your SmartPharma account</p>
+          <p>Login to your MidCart account</p>
         </div>
 
         {error && <div className={styles.errorBox}>{error}</div>}
@@ -72,8 +72,8 @@ export default function Login() {
 
         <div className={styles.demo}>
           <p>Demo Credentials:</p>
-          <button onClick={() => setForm({ email: 'admin@smartpharma.com', password: 'Admin@123' })} className={styles.demoBtn}>Admin</button>
-          <button onClick={() => setForm({ email: 'user@smartpharma.com', password: 'User@123' })} className={styles.demoBtn}>User</button>
+          <button onClick={() => setForm({ email: 'admin@midcart.com', password: 'Admin@123' })} className={styles.demoBtn}>Admin</button>
+          <button onClick={() => setForm({ email: 'user@midcart.com', password: 'User@123' })} className={styles.demoBtn}>User</button>
         </div>
 
         <p className={styles.switchLink}>

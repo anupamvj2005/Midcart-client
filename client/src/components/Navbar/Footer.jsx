@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.brand}>
-          <div className={styles.logo}>💊 <strong>SmartPharma</strong></div>
+          <div className={styles.logo}>💊 <strong>MidCart</strong></div>
           <p>India's most affordable online pharmacy. Save up to 60% on genuine medicines.</p>
           <div className={styles.badges}>
             <span>✔ Certified Pharmacy</span>
@@ -35,7 +35,7 @@ export default function Footer() {
         <div className={styles.contact}>
           <h4>Contact Us</h4>
           <p>📞 1800-XXX-XXXX (Free)</p>
-          <p>📧 support@smartpharma.com</p>
+          <p>📧 support@midcart.com</p>
           <p>🕐 Mon–Sat: 9 AM – 9 PM</p>
           <div className={styles.social}>
             <a href="#" aria-label="Instagram">📸</a>
@@ -47,7 +47,7 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <div className="container">
-          <p>© {new Date().getFullYear()} SmartPharma. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} MidCart. All rights reserved.</p>
           <div className={styles.bottomLinks}>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

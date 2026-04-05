@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Global API Config ensuring deployed backend URL is robust and correctly targeted
-const API = import.meta.env.VITE_API_URL || 'https://pharmax-1-4efg.onrender.com'
+const API = import.meta.env.VITE_API_URL || 'https://midcart-1-4efg.onrender.com'
 
 console.log("API URL:", API);
 

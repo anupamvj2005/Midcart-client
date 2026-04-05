@@ -30,7 +30,7 @@ export default function Register() {
         <div className={styles.header}>
           <div className={styles.logo}>💊</div>
           <h1>Create Account</h1>
-          <p>Join SmartPharma & save on medicines</p>
+          <p>Join MidCart & save on medicines</p>
         </div>
 
         {error && <div className={styles.errorBox}>{error}</div>}

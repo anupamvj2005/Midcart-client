@@ -1,5 +1,5 @@
 ﻿
-> smartpharma-frontend@1.0.0 build
+> midcart-frontend@1.0.0 build
 > vite build
 
 [36mvite v5.4.21 [32mbuilding for production...[36m[39m
@@ -32,10 +32,10 @@ PostCSS you'll need to install
 `@tailwindcss/postcss` and update 
 your PostCSS configuration.[31m
 file: [36mC:/Users/DAMINI/OneDrive/
-Desktop/SmartPharma/frontend/src/ind
+Desktop/MidCart/frontend/src/ind
 ex.css:undefined:NaN[31m
     at at (C:\Users\DAMINI\OneDrive\
-Desktop\SmartPharma\frontend\node_mo
+Desktop\MidCart\frontend\node_mo
 dules\tailwindcss\dist\lib.js:38:164
 3)
     at LazyResult.runOnRoot (C:\User
@@ -43,14 +43,14 @@ s\DAMINI\OneDrive\Desktop\SmartPharm
 a\frontend\node_modules\postcss\lib\
 lazy-result.js:361:16)
     at LazyResult.runAsync (C:\Users
-\DAMINI\OneDrive\Desktop\SmartPharma
+\DAMINI\OneDrive\Desktop\MidCart
 \frontend\node_modules\postcss\lib\l
 azy-result.js:290:26)
     at LazyResult.async (C:\Users\DA
-MINI\OneDrive\Desktop\SmartPharma\fr
+MINI\OneDrive\Desktop\MidCart\fr
 ontend\node_modules\postcss\lib\lazy
 -result.js:192:30)
     at LazyResult.then (C:\Users\DAM
-INI\OneDrive\Desktop\SmartPharma\fro
+INI\OneDrive\Desktop\MidCart\fro
 ntend\node_modules\postcss\lib\lazy-
 result.js:436:17)[39m
