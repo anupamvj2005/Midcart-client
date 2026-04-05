@@ -12,7 +12,12 @@ from utils.inventory_optimizer import optimize_inventory
 from utils.ocr_extractor import extract_medicines_from_prescription
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173", "http://localhost:5000"])
+
+# ✅ FIXED CORS
+CORS(app, origins=[
+    "http://localhost:5173",              # Local frontend
+    "https://your-frontend.vercel.app"    # Production frontend
+])
 
 # ─────────────────────────────────────────────
 # Health Check
@@ -27,10 +32,6 @@ def health():
 # ─────────────────────────────────────────────
 @app.route('/demand-forecast', methods=['POST'])
 def demand_forecast():
-    """
-    Predicts future demand for a medicine based on historical sales.
-    Body: { product_id, product_name, category, sales_history: [{_id: 'YYYY-MM', quantity: N}] }
-    """
     try:
         data = request.get_json()
         if not data:
@@ -52,10 +53,6 @@ def demand_forecast():
 # ─────────────────────────────────────────────
 @app.route('/expiry-risk', methods=['POST'])
 def expiry_risk():
-    """
-    Predicts which medicines are at risk of expiring before being sold.
-    Body: { products: [{ id, name, expiry_date, stock, sales_rate, category }] }
-    """
     try:
         data = request.get_json()
         if not data or 'products' not in data:
@@ -68,14 +65,10 @@ def expiry_risk():
 
 
 # ─────────────────────────────────────────────
-# Product Recommendations
+# Recommendations
 # ─────────────────────────────────────────────
 @app.route('/recommendations', methods=['POST'])
 def recommendations():
-    """
-    Returns recommended product IDs based on category and co-purchase data.
-    Body: { product_id, category, co_purchased_ids: [...] }
-    """
     try:
         data = request.get_json()
         if not data:
@@ -96,10 +89,6 @@ def recommendations():
 # ─────────────────────────────────────────────
 @app.route('/inventory-optimize', methods=['POST'])
 def inventory_optimize():
-    """
-    Suggests reorder quantities and flags issues.
-    Body: { products: [{ id, name, current_stock, low_threshold, sales_count, category }] }
-    """
     try:
         data = request.get_json()
         if not data or 'products' not in data:
@@ -112,41 +101,45 @@ def inventory_optimize():
 
 
 # ─────────────────────────────────────────────
-# Prescription OCR Extraction
+# Prescription OCR
 # ─────────────────────────────────────────────
 @app.route('/extract-prescription', methods=['POST'])
 def extract_prescription():
-    """
-    Extracts medicine names from prescription image URL.
-    Body JSON: { image_url, catalog?: [...product names], is_image?: bool }
-    Or: multipart/form-data with file field 'image'
-    """
     try:
         if request.is_json:
             data = request.get_json() or {}
             image_url = data.get('image_url')
             catalog = data.get('catalog')
             is_image = data.get('is_image', True)
+
             if not image_url:
                 return jsonify({"error": "image_url required"}), 400
+
             result = extract_medicines_from_prescription(
                 image_url=image_url,
                 catalog=catalog,
                 is_image=is_image,
             )
+
         elif 'image' in request.files:
             image_file = request.files['image']
             result = extract_medicines_from_prescription(image_file=image_file, catalog=[])
+
         else:
-            return jsonify({"error": "Provide image_url (JSON) or image file"}), 400
+            return jsonify({"error": "Provide image_url or image file"}), 400
 
         return jsonify(result)
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 
+# ─────────────────────────────────────────────
+# RUN SERVER
+# ─────────────────────────────────────────────
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8000))
     debug = os.getenv('FLASK_ENV') == 'development'
-    print(f"\n[ML] MidCart ML API running on port {port}")
+
+    print(f"[ML] MidCart ML API running on port {port}")
     app.run(host='0.0.0.0', port=port, debug=debug)
