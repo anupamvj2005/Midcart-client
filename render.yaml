@@ -32,3 +32,20 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
+
+services:
+  - type: web
+    name: midcart-ml-api
+    env: python
+    plan: free
+    rootDir: ml-api
+    buildCommand: |
+      pip install --upgrade pip setuptools wheel
+      pip install pandas==2.0.3
+      pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: FLASK_ENV
+        value: production
