@@ -10,7 +10,7 @@ console.log("Clean API URL:", API_BASE_URL);
 // This will safely resolve to: https://midcart-backend.onrender.com/api
 const api = axios.create({
   baseURL: `${API_BASE_URL}/api`,
-  timeout: 15000,
+  timeout: 60000,
 })
 
 // Attach JWT token to every request

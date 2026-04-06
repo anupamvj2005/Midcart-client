@@ -26,6 +26,36 @@ const mlRoutes = require('./routes/mlRoutes');
 const app = express();
 
 // =====================
+// 🛑 1. CORS (MUST BE FIRST)
+// =====================
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://midcart-client.vercel.app",
+    process.env.CLIENT_URL // your Vercel URL
+  ],
+  credentials: true
+}));
+
+// =====================
+// 📊 2. CORE MIDDLEWARE (BODY PARSERS)
+// =====================
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+
+// =====================
+// 🔐 3. SECURITY & RATE LIMITING
+// =====================
+app.use(helmet());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+});
+app.use('/api/', limiter);
+
+// =====================
 // 🔐 ENV SAFETY
 // =====================
 if (!process.env.JWT_SECRET) {
@@ -37,35 +67,6 @@ if (!process.env.JWT_SECRET) {
 // 📁 STATIC FILES
 // =====================
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// =====================
-// 🔐 SECURITY
-// =====================
-app.use(helmet());
-
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    process.env.CLIENT_URL // your Vercel URL
-  ],
-  credentials: true
-}));
-
-// =====================
-// 🚦 RATE LIMIT
-// =====================
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 200,
-});
-app.use('/api/', limiter);
-
-// =====================
-// 📊 MIDDLEWARE
-// =====================
-app.use(morgan('dev'));
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
 
 // =====================
 // 🔗 API ROUTES
@@ -81,7 +82,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ml', mlRoutes);
 
 // =====================
-// ✅ ROOT ROUTE (FIXED)
+// ✅ ROOT ROUTE
 // =====================
 app.get('/', (req, res) => {
   res.status(200).json({
@@ -101,7 +102,7 @@ app.get('/health', (req, res) => {
 });
 
 // =====================
-// ❌ 404 HANDLER (IMPORTANT)
+// ❌ 404 HANDLER
 // =====================
 app.use((req, res) => {
   res.status(404).json({
