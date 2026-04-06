@@ -41,7 +41,7 @@ echo "════════════════════════�
 echo "✅ MidCart is starting up!"
 echo ""
 echo "  Frontend:  http://localhost:5173"
-echo "  Backend:   fetch(`${import.meta.env.VITE_API_URL}/api/medicines`)"
+echo "  Backend:   fetch(`${import.meta.env.VITE_API_URL}`)"
 echo "  ML API:    http://localhost:8000"
 echo ""
 echo "  Admin:     admin@midcart.com / Admin@123"

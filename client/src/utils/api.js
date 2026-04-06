@@ -1,12 +1,15 @@
 import axios from 'axios'
 
-// Global API Config ensuring deployed backend URL is robust and correctly targeted
-const API = import.meta.env.VITE_API_URL || 'https://midcart-1-4efg.onrender.com'
+// 1. Grab the URL from Vercel (or use the fallback)
+// 2. The .replace(/\/$/, "") safely removes any accidental trailing slash
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'https://midcart-backend.onrender.com').replace(/\/$/, "");
 
-console.log("API URL:", API);
+console.log("Clean API URL:", API_BASE_URL);
 
+// 3. Create the Axios instance. 
+// This will safely resolve to: https://midcart-backend.onrender.com/api
 const api = axios.create({
-  baseURL: `${API}/api`,
+  baseURL: `${API_BASE_URL}/api`,
   timeout: 15000,
 })
 
@@ -17,7 +20,7 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Handle 401 globally
+// Handle 401 Unauthorized globally
 api.interceptors.response.use(
   (res) => res,
   (error) => {
