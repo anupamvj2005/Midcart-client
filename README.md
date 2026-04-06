@@ -211,11 +211,6 @@ Password: Admin@123
 
 ---
 
-## 🤝 Contributors
-
-* Anupam Jadhav
-* Team Members
-
 ---
 
 ## 📄 License
