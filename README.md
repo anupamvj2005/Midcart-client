@@ -1,94 +1,128 @@
-# 💊 Midcart – Intelligent Online Pharmacy Platform
+# 💊 MidCart – Intelligent Online Pharmacy Platform
 
-A full-stack MERN + Python ML pharmacy system with prescription upload, smart inventory, demand forecasting & more.
+🚀 A full-stack **MERN + Python ML-based pharmacy system** designed to provide fast, secure, and intelligent healthcare services.  
+MidCart enables users to search medicines, upload prescriptions, manage orders, and leverage AI-powered insights like demand forecasting and expiry alerts.
 
 ---
 
-## 📁 Project Structure
+## 📌 Overview
+
+MidCart is a modern digital pharmacy platform that bridges the gap between traditional pharmacies and smart healthcare solutions.  
+It combines **e-commerce, prescription validation, and machine learning** to deliver a seamless user experience.
+
+---
+
+## ✨ Key Features
+
+- 💊 **Medicine Search & Ordering** – Search by name, brand, or symptoms  
+- 📄 **Prescription Upload System** – Verified by pharmacists  
+- 🛒 **Smart Cart & Checkout** – Easy ordering with secure payments  
+- 📊 **Admin Dashboard** – Manage orders, inventory, analytics  
+- 🤖 **ML Demand Forecasting** – Predict medicine demand trends  
+- ⚠️ **Low Stock & Expiry Alerts** – Smart inventory management  
+- 💡 **Recommendation System** – Suggest related medicines  
+- 📦 **Fast Delivery System** – Efficient order processing  
+- 📱 **Responsive UI** – Works across all devices  
+
+---
+
+## 🏗️ Project Architecture
+
 
 ```
-Midcart/
-├── client/          → React.js (Vite) – User Interface
-├── server/          → Node.js + Express.js – REST API
+
+MidCart/
+├── client/          → React.js (Vite) – Frontend UI
+├── server/          → Node.js + Express – Backend API
 ├── ml-api/          → Python Flask – ML Microservice
-└── database/        → MongoDB Schemas + Seed Data
+└── database/        → MongoDB Schemas & Seed Data
+
 ```
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer        | Technology Used                |
+|-------------|------------------------------|
+| Frontend     | React.js (Vite), HTML, CSS   |
+| Backend      | Node.js, Express.js          |
+| Database     | MongoDB (Atlas / Local)      |
+| ML Service   | Python, Flask, Scikit-learn  |
+| Deployment   | Vercel + Render              |
 
 ---
 
 ## 🚀 How to Run Locally
 
-You can launch all services (client, server, ml-api) concurrently with a single command!
+### 📌 Prerequisites
 
-### 📌 Prerequisites:
-
-* Node.js installed
-* Python installed
-* MongoDB installed locally OR MongoDB Atlas configured
+- Node.js installed  
+- Python installed  
+- MongoDB (Local or Atlas)  
 
 ---
 
-### ⚙️ Setup Environment Variables
+### 🔧 Setup Environment Variables
 
-#### 1. Backend (`server/.env`)
+#### 1️⃣ Backend (`server/.env`)
 
 ```
+
 MONGO_URI=your_mongodb_url
 JWT_SECRET=your_secret_key
-CLIENT_URL=http://localhost:5173
-```
+CLIENT_URL=[http://localhost:5173](http://localhost:5173)
+ML_API_URL=[http://localhost:8000](http://localhost:8000)
 
-#### 2. Frontend (`client/.env`)
-
-```
-VITE_API_URL=http://localhost:5000
-```
-
-#### 3. ML API (`ml-api/.env`) *(if required)*
-
-```
-# Add variables if your ML service needs them
 ```
 
 ---
 
-### ▶️ Start All Services
+#### 2️⃣ Frontend (`client/.env`)
+
+```
+
+VITE_API_URL=[http://localhost:5000](http://localhost:5000)
+
+```
+
+---
+
+#### 3️⃣ ML API (`ml-api/.env`)
+
+```
+
+# Add if required
+
+````
+
+---
+
+### ▶️ Run All Services
 
 ```bash
 npm run dev
-```
-
-### 🌐 Services will run on:
-
-* **Client (React)** → http://localhost:5173
-* **Server (Node)** → http://localhost:5000
-* **ML API (Flask)** → http://localhost:8000
+````
 
 ---
 
-## 🌍 How to Deploy for Free
+### 🌐 Local URLs
 
-This project can be deployed using:
-
-* Frontend → Vercel
-* Backend & ML API → Render
-* Database → MongoDB Atlas
+* Frontend → [http://localhost:5173](http://localhost:5173)
+* Backend → [http://localhost:5000](http://localhost:5000)
+* ML API → [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 🚀 STEP 1: Deploy Backend (Render)
+## 🌍 Deployment Guide (Free)
 
-1. Go to Render and login
-2. Click **New → Web Service**
-3. Select your GitHub repo
+### 🚀 STEP 1: Deploy Backend (Render)
 
-### 🔧 Settings:
+* Root Directory → `server`
+* Build Command → `npm install`
+* Start Command → `node server.js`
 
-* **Root Directory:** `server`
-* **Build Command:** `npm install`
-* **Start Command:** `node server.js`
-
-### 🔑 Environment Variables:
+#### Environment Variables:
 
 ```
 MONGO_URI=your_mongodb_atlas_url
@@ -96,84 +130,75 @@ JWT_SECRET=your_secret_key
 NODE_ENV=production
 PORT=10000
 CLIENT_URL=https://your-frontend.vercel.app
-```
-
-👉 Deploy and copy backend URL:
-
-```
-https://your-backend.onrender.com
-```
-
----
-
-## 🤖 STEP 2: Deploy ML API (Render)
-
-1. Create another Web Service
-2. Select same repo
-
-### 🔧 Settings:
-
-* **Root Directory:** `ml-api`
-* **Build Command:** `pip install -r requirements.txt`
-* **Start Command:** `python app.py`
-
-👉 After deploy:
-
-```
-https://your-ml-api.onrender.com
-```
-
-👉 Add this to backend ENV:
-
-```
 ML_API_URL=https://your-ml-api.onrender.com
 ```
 
 ---
 
-## 🌐 STEP 3: Deploy Frontend (Vercel)
+### 🤖 STEP 2: Deploy ML API (Render)
 
-1. Go to Vercel and login
-2. Click **Add New → Project**
-3. Import GitHub repo
+* Root Directory → `ml-api`
+* Build Command → `pip install -r requirements.txt`
+* Start Command → `python app.py`
 
-### 🔧 Settings:
+---
 
-* **Root Directory:** `client`
+### 🌐 STEP 3: Deploy Frontend (Vercel)
 
-### 🔑 Environment Variables:
+* Root Directory → `client`
+
+#### Environment Variables:
 
 ```
 VITE_API_URL=https://your-backend.onrender.com
 ```
 
-👉 Click **Deploy**
-
-👉 You will get:
-
-```
-https://your-app.vercel.app
-```
-
 ---
 
-## 🔗 FINAL STEP (VERY IMPORTANT)
+### 🔗 Final Setup
 
 After frontend deployment:
 
-1. Copy your Vercel URL
-2. Go to Render → Backend → Environment
-3. Update:
+1. Copy Vercel URL
+2. Update backend `.env`:
 
 ```
 CLIENT_URL=https://your-app.vercel.app
 ```
 
-4. Click:
+3. Redeploy backend
+
+---
+
+## 🔐 Default Admin Credentials
 
 ```
-Manual Deploy → Deploy latest commit
+Email: admin@midcart.com
+Password: Admin@123
 ```
+
+---
+
+## 🔄 System Workflow
+
+1. User visits website
+2. Searches or browses medicines
+3. Selects products
+4. Uploads prescription (if required)
+5. Adds items to cart
+6. Completes payment
+7. Pharmacy processes order
+8. Delivery within few hours
+
+---
+
+## 📊 Future Enhancements
+
+* 🔊 Voice-based medicine search
+* 🚁 Drone delivery integration
+* 📈 Advanced AI analytics dashboard
+* 🧠 Personalized health recommendations
+* 📍 Real-time delivery tracking
 
 ---
 
@@ -181,37 +206,27 @@ Manual Deploy → Deploy latest commit
 
 * ❌ Do NOT use `localhost` in deployed apps
 * ✅ Always use deployed URLs
-* ⚠️ Render free tier sleeps after inactivity (normal)
-* ✅ Ensure MongoDB Atlas allows access (`0.0.0.0/0`)
+* ⚠️ Render free tier may sleep (normal behavior)
+* ✅ MongoDB Atlas should allow access (`0.0.0.0/0`)
 
 ---
 
-## 🔑 Default Admin Credentials
+## 🤝 Contributors
 
-* Email: `admin@midcart.com`
-* Password: `Admin@123`
-
----
-
-## 🌟 Features
-
-* 📄 Prescription Upload & OCR
-* 💊 Medicine Search & Ordering
-* 🛒 Smart Cart & Checkout
-* 📊 Admin Dashboard with Analytics
-* 🤖 ML Demand Forecasting
-* ⚠️ Low Stock & Expiry Alerts
-* 💡 Medicine Recommendations
-* 📱 Responsive Design
+* Anupam Jadhav
+* Team Members
 
 ---
 
-## 🎯 Tech Stack
+## 📄 License
 
-* Frontend: React (Vite)
-* Backend: Node.js, Express.js
-* Database: MongoDB
-* ML: Python (Flask)
-* Deployment: Vercel + Render
+This project is developed for educational and academic purposes.
 
 ---
+
+## ⭐ Support
+
+If you like this project:
+
+👉 Give it a **star ⭐ on GitHub**
+👉 Share with others
