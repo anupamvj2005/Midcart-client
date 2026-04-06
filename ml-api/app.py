@@ -16,7 +16,7 @@ app = Flask(__name__)
 # ✅ FIXED CORS
 CORS(app, origins=[
     "http://localhost:5173",              # Local frontend
-    "https://your-frontend.vercel.app"    # Production frontend
+    "https://midcart-client.vercel.app"    # Production frontend
 ])
 
 # ─────────────────────────────────────────────
